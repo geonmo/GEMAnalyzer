@@ -34,5 +34,13 @@ process.TFileService = cms.Service("TFileService",
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:upgradePLS3', '')
 
+# Automatic addition of the customisation function from Geometry.GEMGeometry.gemGeometryCustoms
+from Geometry.GEMGeometry.gemGeometryCustoms import custom_GE11_8and8partitions_v1 
+
+#call to customisation function custom_GE11_8and8partitions_v1 imported from Geometry.GEMGeometry.gemGeometryCustoms
+process = custom_GE11_8and8partitions_v1(process)
+
+# End of customisation functions
+
 
 process.p = cms.Path(process.demo)

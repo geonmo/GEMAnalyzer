@@ -42,6 +42,11 @@
 
 #include "Geometry/Records/interface/MuonGeometryRecord.h"
 #include "Geometry/CommonTopologies/interface/StripTopology.h"
+
+#include <TNtuple.h>
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+
 //
 // class declaration
 //
@@ -68,6 +73,7 @@ class digiAnalyzer : public edm::EDAnalyzer {
       edm::EDGetToken stripToken_;
       int  minBX_;
       int  maxBX_;
+      TNtuple* ntuple;
 };
 
 //
@@ -88,6 +94,8 @@ digiAnalyzer::digiAnalyzer(const edm::ParameterSet& iConfig)
   stripToken_ = consumes<GEMDigiCollection>(iConfig.getParameter<edm::InputTag>("stripLabel"));
   minBX_ = iConfig.getParameter<int>("minBX");
   maxBX_ = iConfig.getParameter<int>("maxBX");
+  edm::Service<TFileService> fs;
+  ntuple = fs->make<TNtuple>("strip", "strip","region:station:chamber:layer:strip:bx:eta:phi:r:x:y:z");
 }
 
 
@@ -136,21 +144,28 @@ digiAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       std::cout<<"Error! Need to check geometry."<<std::endl; 
       continue;
     }
+    const BoundPlane & surface = gdet->surface();
+    const GEMEtaPartition * roll = gem_geometry->etaPartition(id);
+    Short_t region  = id.region();
+    Short_t station = id.station();
+    Short_t chamber = id.chamber();
+    Short_t layer   = id.layer();
+
     for ( auto digiItr = (*cItr).second.first ; digiItr != (*cItr).second.second ; digiItr++) {
       Short_t strip = (Short_t) digiItr->strip();
-      /*
       Short_t bx = (Short_t) digiItr->bx();
+      if ( bx < minBX_ or bx>maxBX_ ) continue;
 
       LocalPoint lp = roll->centreOfStrip(digiItr->strip());
-
       GlobalPoint gp = surface.toGlobal(lp);
-      Float_t g_r = (Float_t) gp.perp();
+      Float_t g_eta = (Float_t) gp.eta();
       Float_t g_phi = (Float_t) gp.phi();
+
+      Float_t g_r = (Float_t) gp.perp();
       Float_t g_x = (Float_t) gp.x();
       Float_t g_y = (Float_t) gp.y();
       Float_t g_z = (Float_t) gp.z();
-      */
-      std::cout<<"strip : "<<strip<<std::endl;
+      ntuple->Fill( region, station, chamber, layer, strip, bx, g_eta, g_phi,g_r, g_x,g_y,g_z);
 
     } 
   } 
