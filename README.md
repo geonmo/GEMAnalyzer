@@ -1,6 +1,6 @@
 GEMAnalyzer
 ===========
-""" bash
+''' bash
 git clone <this>
 scram b
-"""
+'''
