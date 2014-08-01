@@ -1,7 +1,7 @@
 GEMAnalyzer
 ===========
 ``` bash
-git clone <this>
+git clone git@github.com:geonmo/GEMAnalyzer.git
 scram b
 ```
 
