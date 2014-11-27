@@ -15,7 +15,7 @@ process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )
 
 
-process.demo = cms.EDAnalyzer('geomanalyzer',
+process.demo = cms.EDAnalyzer('geomAnalyzer',
 )
 process.source = cms.Source("EmptySource")
 process.TFileService = cms.Service("TFileService",

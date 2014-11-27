@@ -1,9 +1,9 @@
 // -*- C++ -*-
 //
-// Package:    geomanalyzer
-// Class:      geomanalyzer
+// Package:    geomAnalyzer
+// Class:      geomAnalyzer
 // 
-/**\class geomanalyzer geomanalyzer.cc GEMAnalyzer/geomanalyzer/plugins/geomanalyzer.cc
+/**\class geomAnalyzer geomAnalyzer.cc GEMAnalyzer/geomAnalyzer/plugins/geomAnalyzer.cc
 
  Description: [one line class summary]
 
@@ -52,10 +52,10 @@
 // class declaration
 //
 
-class geomanalyzer : public edm::EDAnalyzer {
+class geomAnalyzer : public edm::EDAnalyzer {
    public:
-      explicit geomanalyzer(const edm::ParameterSet&);
-      ~geomanalyzer();
+      explicit geomAnalyzer(const edm::ParameterSet&);
+      ~geomAnalyzer();
 
       static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
@@ -85,7 +85,7 @@ class geomanalyzer : public edm::EDAnalyzer {
 //
 // constructors and destructor
 //
-geomanalyzer::geomanalyzer(const edm::ParameterSet& iConfig)
+geomAnalyzer::geomAnalyzer(const edm::ParameterSet& iConfig)
 
 {
    //now do what ever initialization is needed
@@ -94,7 +94,7 @@ geomanalyzer::geomanalyzer(const edm::ParameterSet& iConfig)
 }
 
 
-geomanalyzer::~geomanalyzer()
+geomAnalyzer::~geomAnalyzer()
 {
  
    // do anything here that needs to be done at desctruction time
@@ -109,7 +109,7 @@ geomanalyzer::~geomanalyzer()
 
 // ------------ method called for each event  ------------
 void
-geomanalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+geomAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
   using namespace edm;
 
@@ -146,20 +146,20 @@ geomanalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 // ------------ method called once each job just before starting event loop  ------------
 void 
-geomanalyzer::beginJob()
+geomAnalyzer::beginJob()
 {
 }
 
 // ------------ method called once each job just after ending the event loop  ------------
 void 
-geomanalyzer::endJob() 
+geomAnalyzer::endJob() 
 {
 }
 
 // ------------ method called when starting to processes a run  ------------
 /*
 void 
-geomanalyzer::beginRun(edm::Run const&, edm::EventSetup const&)
+geomAnalyzer::beginRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 */
@@ -167,7 +167,7 @@ geomanalyzer::beginRun(edm::Run const&, edm::EventSetup const&)
 // ------------ method called when ending the processing of a run  ------------
 /*
 void 
-geomanalyzer::endRun(edm::Run const&, edm::EventSetup const&)
+geomAnalyzer::endRun(edm::Run const&, edm::EventSetup const&)
 {
 }
 */
@@ -175,7 +175,7 @@ geomanalyzer::endRun(edm::Run const&, edm::EventSetup const&)
 // ------------ method called when starting to processes a luminosity block  ------------
 /*
 void 
-geomanalyzer::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+geomAnalyzer::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 */
@@ -183,14 +183,14 @@ geomanalyzer::beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup 
 // ------------ method called when ending the processing of a luminosity block  ------------
 /*
 void 
-geomanalyzer::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
+geomAnalyzer::endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&)
 {
 }
 */
 
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 void
-geomanalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+geomAnalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
   //The following says we do not know what parameters are allowed so do no validation
   // Please change this to state exactly what you do use, even if it is no parameters
   edm::ParameterSetDescription desc;
@@ -199,4 +199,4 @@ geomanalyzer::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
 }
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(geomanalyzer);
+DEFINE_FWK_MODULE(geomAnalyzer);
