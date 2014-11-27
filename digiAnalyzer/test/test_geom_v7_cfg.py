@@ -19,7 +19,7 @@ process.demo = cms.EDAnalyzer('geomAnalyzer'
 
 process.source = cms.Source("EmptySource")
 process.TFileService = cms.Service("TFileService",
- fileName = cms.string("ntuple_geom_v6.root"),
+ fileName = cms.string("ntuple_geom_v7.root"),
 )
 
 from Configuration.AlCa.GlobalTag import GlobalTag

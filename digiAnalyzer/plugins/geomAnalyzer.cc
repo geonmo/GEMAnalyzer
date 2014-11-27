@@ -90,7 +90,7 @@ geomAnalyzer::geomAnalyzer(const edm::ParameterSet& iConfig)
 {
    //now do what ever initialization is needed
   edm::Service<TFileService> fs;
-  ntuple = fs->make<TNtuple>("strip", "strip","region:station:chamber:layer:strip:phi");
+  ntuple = fs->make<TNtuple>("strip", "strip","region:station:chamber:layer:strip:x:y:z:eta:phi");
 }
 
 
@@ -134,11 +134,15 @@ geomAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 	            float nStrips(parameters[3]);
               for( int strip = 0 ; strip <=nStrips ; strip++) {
 	              LocalPoint lEdge(topology->localPosition(strip));
+                double x = roll->toGlobal(lEdge).x();  
+                double y = roll->toGlobal(lEdge).y();  
+                double z = roll->toGlobal(lEdge).z();  
+                double eta = roll->toGlobal(lEdge).eta();  
                 double phi = roll->toGlobal(lEdge).phi().degrees();  
                 GEMDetId id( roll->id()) ; 
                 //std::cout<<id<<"  "<<"strip : "<<strip<<" phi : "<< phi<<std::endl;
                 //printf("%s %f\n", id);
-                ntuple->Fill( id.region(), id.station(), id.chamber(), id.layer(), strip, phi);
+                ntuple->Fill( id.region(), id.station(), id.chamber(), id.layer(), strip, x,y,z,eta,phi);
               }
             }
 }
