@@ -21,7 +21,7 @@ python -i checker.py
 
 ## Explain about checker.py
 - Only change "cut" value for plots.
-ex) "region == 1 && chamber ==1"
-ex) "abs(region)==1 && chamber < 10 && layer == 1"
+-- ex) "region == 1 && chamber ==1"
+-- ex) "abs(region)==1 && chamber < 10 && layer == 1"
 
 
