@@ -14,14 +14,14 @@ def PrintStripPhi(nt, cut="1", scale = 40) :
   nt.Draw("strip:phi",cut)
   return
 
-def GetDetPhi( nt, cut="1", scale = 40 ) :
+def GetDetPhi( nt, desc, cut="1", scale = 40 ) :
   nt.Draw("int(station-1)*2+int(layer):phi >> temp_detphi",cut)
   h1 = gDirectory.Get("temp_detphi")
   xmin, xmax, ymin, ymax = GetMinMax(h1)
   nbinx = int(xmax-xmin) * scale 
   nbiny = int(ymax-ymin)
   title = "phi vs Detector label with %s; #phi(degree) / %.3f ; # of Strip"%( cut,  (xmax-xmin)/nbinx )
-  h1 = TH2F("phi_det",title,nbinx,xmin,xmax, 6, 1, 7)
+  h1 = TH2F("phi_det_%s"%desc,title,nbinx,xmin,xmax, 6, 1, 7)
   yaxis = h1.GetYaxis()
   yaxis.SetBinLabel(1,"St1,La1")
   yaxis.SetBinLabel(2,"St1,La2")
@@ -29,12 +29,13 @@ def GetDetPhi( nt, cut="1", scale = 40 ) :
   yaxis.SetBinLabel(4,"St2,La2")
   yaxis.SetBinLabel(5,"St3,La1")
   yaxis.SetBinLabel(6,"St3,La2")
-  nt.Draw("int(station-1)*2+int(layer):phi >> phi_det",cut)
+  draw_option = "int(station-1)*2+int(layer):phi >> phi_det_%s"%desc
+  nt.Draw(draw_option,cut)
   h1.SetStats(0)
   return h1
    
 
-def GetStripPhi(nt, cut="1", scale = 40 ) :
+def GetStripPhi(nt, desc, cut="1", scale = 40 ) :
   nt.Draw("strip:phi >> temp_hist",cut)
   h1 = gDirectory.Get("temp_hist")
   xmin, xmax, ymin, ymax = GetMinMax(h1)
@@ -42,8 +43,9 @@ def GetStripPhi(nt, cut="1", scale = 40 ) :
   nbinx = int(xmax-xmin) * scale
   nbiny = int(ymax-ymin)
   title = "phi vs strip ; #phi(degree) / %.3f ; # of Strip"%((xmax-xmin)/nbinx)
-  h1 = TH2F("phi_strip",title,nbinx,xmin,xmax, nbiny, ymin, ymax)
-  nt.Draw("strip:phi >> phi_strip",cut)
+  h1 = TH2F("phi_strip_%s"%desc,title,nbinx,xmin,xmax, nbiny, ymin, ymax)
+  draw_option = "strip:phi >> phi_strip_%s"%desc
+  nt.Draw(draw_option,cut)
   print xmin,xmax, h1.GetXaxis().GetBinWidth(1)
   return h1
 
@@ -58,10 +60,10 @@ if __name__ == '__main__' :
   c1 = TCanvas("c1","c1",3600,1800)
   c1.Divide(2,1)
   c1.cd(1)
-  h1 = GetStripPhi( nt, cut)
+  h1 = GetStripPhi( nt, "st1", cut)
   h1.Draw("colz")
   c1.cd(2)
-  h2 = GetDetPhi(nt, cut)
+  h2 = GetDetPhi(nt, "st1", cut)
   h2.Draw("colz") 
   c1.Update()
   c1.SaveAs("c1.png")
