@@ -21,15 +21,23 @@ def GetDetPhi( nt, desc, cut="1", scale = 40 ) :
   nbinx = int(xmax-xmin) * scale 
   nbiny = int(ymax-ymin)
   title = "phi vs Detector label with %s; #phi(degree) / %.3f ; # of Strip"%( cut,  (xmax-xmin)/nbinx )
-  h1 = TH2F("phi_det_%s"%desc,title,nbinx,xmin,xmax, 6, 1, 7)
+  h1 = TH2F("phi_det_%s"%desc,title,nbinx,xmin,xmax, 12, 1, 13)
   yaxis = h1.GetYaxis()
-  yaxis.SetBinLabel(1,"St1,La1")
-  yaxis.SetBinLabel(2,"St1,La2")
-  yaxis.SetBinLabel(3,"St2,La1")
-  yaxis.SetBinLabel(4,"St2,La2")
-  yaxis.SetBinLabel(5,"St3,La1")
-  yaxis.SetBinLabel(6,"St3,La2")
-  draw_option = "int(station-1)*2+int(layer):phi >> phi_det_%s"%desc
+  yaxis.SetBinLabel(1,"St1,La1_even")
+  yaxis.SetBinLabel(2,"St1,La1_odd")
+  yaxis.SetBinLabel(3,"St1,La2_even")
+  yaxis.SetBinLabel(4,"St1,La2_odd")
+  yaxis.SetBinLabel(5,"St2,La1_even")
+  yaxis.SetBinLabel(6,"St2,La1_odd")
+  yaxis.SetBinLabel(7,"St2,La2_even")
+  yaxis.SetBinLabel(8,"St2,La2_odd")
+  yaxis.SetBinLabel(9,"St3,La1_even")
+  yaxis.SetBinLabel(10,"St3,La1_odd")
+  yaxis.SetBinLabel(11,"St3,La2_even")
+  yaxis.SetBinLabel(12,"St3,La2_odd")
+  yaxis.SetLabelSize(0.02)
+  yaxis.SetLabelOffset(0)
+  draw_option = "int(station-1)*4+int(layer-1)*2+int(chamber%%2)+1:phi >> phi_det_%s"%desc
   nt.Draw(draw_option,cut)
   h1.SetStats(0)
   return h1
@@ -55,7 +63,7 @@ if __name__ == '__main__' :
   file = TFile("ntuple_geom_v4.root")
   nt = file.Get("demo/strip")
 
-  cut = "abs(phi)<10 && region == 1 && (chamber ==1)"
+  cut = "region == 1 && (chamber ==2)"
 
   c1 = TCanvas("c1","c1",3600,1800)
   c1.Divide(2,1)

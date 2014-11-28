@@ -90,7 +90,7 @@ geomAnalyzer::geomAnalyzer(const edm::ParameterSet& iConfig)
 {
    //now do what ever initialization is needed
   edm::Service<TFileService> fs;
-  ntuple = fs->make<TNtuple>("strip", "strip","region:station:chamber:layer:strip:x:y:z:eta:phi");
+  ntuple = fs->make<TNtuple>("strip", "strip","region:station:chamber:layer:roll:strip:x:y:z:eta:phi");
 }
 
 
@@ -142,7 +142,7 @@ geomAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
                 GEMDetId id( roll->id()) ; 
                 //std::cout<<id<<"  "<<"strip : "<<strip<<" phi : "<< phi<<std::endl;
                 //printf("%s %f\n", id);
-                ntuple->Fill( id.region(), id.station(), id.chamber(), id.layer(), strip, x,y,z,eta,phi);
+                ntuple->Fill( id.region(), id.station(), id.chamber(), id.layer(), id.roll(), strip, x,y,z,eta,phi);
               }
             }
 }
