@@ -20,7 +20,7 @@ def GetDetPhi( nt, desc, cut="1", scale = 40 ) :
   xmin, xmax, ymin, ymax = GetMinMax(h1)
   nbinx = int(xmax-xmin) * scale 
   nbiny = int(ymax-ymin)
-  title = "phi vs Detector label with %s; #phi(degree) / %.3f ; # of Strip"%( cut,  (xmax-xmin)/nbinx )
+  title = "phi vs Detector label with %s; #phi(degree) / %.3f ; ;"%( cut,  (xmax-xmin)/nbinx )
   h1 = TH2F("phi_det_%s"%desc,title,nbinx,xmin,xmax, 12, 1, 13)
   yaxis = h1.GetYaxis()
   yaxis.SetBinLabel(1,"St1,La1_even")
@@ -50,7 +50,7 @@ def GetStripPhi(nt, desc, cut="1", scale = 40 ) :
   print xmin, xmax, ymin, ymax
   nbinx = int(xmax-xmin) * scale
   nbiny = int(ymax-ymin)
-  title = "phi vs strip ; #phi(degree) / %.3f ; # of Strip"%((xmax-xmin)/nbinx)
+  title = "phi vs strip ; #phi(degree) / %.3f ; ;"%((xmax-xmin)/nbinx)
   h1 = TH2F("phi_strip_%s"%desc,title,nbinx,xmin,xmax, nbiny, ymin, ymax)
   draw_option = "strip:phi >> phi_strip_%s"%desc
   nt.Draw(draw_option,cut)

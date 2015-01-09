@@ -43,3 +43,15 @@ h6 = GetDetPhi( ntuple_v7, "v7", cut,scale)
 h6.Draw("colz")
 #c1.Update()
 c1.SaveAs("plot.png")
+
+c1 = TCanvas("canvas","v4",800,800)
+h2.Draw("colz")
+c1.SaveAs("v4.png")
+
+c1 = TCanvas("canvas_v6","v6",800,800)
+h4.Draw("colz")
+c1.SaveAs("v6.png")
+
+c1 = TCanvas("canvas_v7","v7",800,800)
+h6.Draw("colz")
+c1.SaveAs("v7.png")
