@@ -9,7 +9,7 @@ ntuple_v6 = filev6.Get("demo/strip")
 filev7 = TFile("ntuple_geom_v7.root")
 ntuple_v7 = filev7.Get("demo/strip")
 
-cut = "region == 1 && roll == 8 && phi>14.5 && phi <15.5"
+cut = "region == 1 &&  phi>14.5 && phi <15.5"
 
 c1 = TCanvas("gc","GeometryChecker",3600,2400)
 c1.Divide(3,2)
@@ -44,14 +44,14 @@ h6.Draw("colz")
 #c1.Update()
 c1.SaveAs("plot.png")
 
-c1 = TCanvas("canvas","v4",800,800)
+c1 = TCanvas("canvas","v4",1600,1600)
 h2.Draw("colz")
 c1.SaveAs("v4.png")
 
-c1 = TCanvas("canvas_v6","v6",800,800)
+c1 = TCanvas("canvas_v6","v6",1600,1600)
 h4.Draw("colz")
 c1.SaveAs("v6.png")
 
-c1 = TCanvas("canvas_v7","v7",800,800)
+c1 = TCanvas("canvas_v7","v7",1600,1600)
 h6.Draw("colz")
 c1.SaveAs("v7.png")
